@@ -189,7 +189,7 @@ DISEASE_INFO = {
 
 uploaded = st.file_uploader(
 
-    "📤 Upload Chest X-Ray",
+    " Upload Chest X-Ray",
 
     type=["jpg","jpeg","png"]
 
@@ -200,7 +200,7 @@ st.markdown("---")
 
 if uploaded is not None:
 
-    with st.spinner("🧠 AI is analyzing the Chest X-Ray..."):
+    with st.spinner(" AI is analyzing the Chest X-Ray..."):
 
         # Preprocess image
         image, original = preprocess_image(uploaded)
@@ -230,7 +230,7 @@ if uploaded is not None:
 
     with right_col:
 
-        st.subheader("🔥 Grad-CAM Visualization")
+        st.subheader(" Grad-CAM Visualization")
 
         st.image(
             overlay,
@@ -247,19 +247,19 @@ if uploaded is not None:
 
         if disease == "Normal":
 
-            st.success(f"### ✅ {disease}")
+            st.success(f"###  {disease}")
 
         elif disease == "Pneumonia":
 
-            st.error(f"### 🔴 {disease}")
+            st.error(f"###  {disease}")
 
         elif disease == "Tuberculosis":
 
-            st.warning(f"### 🟠 {disease}")
+            st.warning(f"###  {disease}")
 
         else:
 
-            st.info(f"### ⚪ {disease}")
+            st.info(f"###  {disease}")
 
     with metric2:
 
@@ -275,7 +275,7 @@ if uploaded is not None:
 
     # ---------------------- PROBABILITY CHART ----------------------
 
-    st.subheader("📊 Prediction Confidence for Each Class")
+    st.subheader(" Prediction Confidence for Each Class")
 
     probability_df = pd.DataFrame(
         {
@@ -294,10 +294,6 @@ if uploaded is not None:
         color_continuous_scale="Blues"
     )
 
-    # fig.update_traces(
-    #     texttemplate="%{text:.2f}%",
-    #     textposition="outside"
-    # )
     fig.update_traces(
 
     texttemplate="%{text:.2f}%",
@@ -309,17 +305,6 @@ if uploaded is not None:
         color="black")
 
     )
-
-    # fig.update_layout(
-    #     height=350,
-    #     xaxis_title="Confidence (%)",
-    #     yaxis_title="",
-    #     coloraxis_showscale=False,
-    #     plot_bgcolor="black",
-    #     paper_bgcolor="white",
-    #     font=dict(size=15),
-    #     margin=dict(l=20, r=20, t=30, b=20)
-    # )
 
     fig.update_layout(
 
@@ -385,7 +370,7 @@ if uploaded is not None:
 
     # ---------------------- MODEL DETAILS ----------------------
 
-    with st.expander("📖 Model Details"):
+    with st.expander(" Model Details"):
 
         st.markdown("""
 ### Model
@@ -411,117 +396,7 @@ It should **NOT** be used as a substitute for professional medical diagnosis.
 Always consult a qualified healthcare professional before making any medical decisions.
         """
     )
-# st.subheader("📊 Prediction Confidence for Each Class")
 
-#     probability_df = pd.DataFrame(
-#         {
-#             "Disease": CLASS_NAMES,
-#             "Confidence": probabilities[0] * 100
-#         }
-#     )
-    
-#     fig = px.bar(
-    
-#         probability_df,
-    
-#         x="Confidence",
-    
-#         y="Disease",
-    
-#         orientation="h",
-    
-#         text="Confidence",
-    
-#         color="Confidence",
-    
-#         color_continuous_scale="Blues"
-    
-#     )
-    
-#     fig.update_traces(
-    
-#         texttemplate="%{text:.2f}%",
-    
-#         textposition="outside"
-    
-#     )
-    
-#     fig.update_layout(
-    
-#         height=350,
-    
-#         xaxis_title="Confidence (%)",
-    
-#         yaxis_title="",
-    
-#         coloraxis_showscale=False,
-    
-#         plot_bgcolor="white",
-    
-#         paper_bgcolor="white",
-    
-#         font=dict(size=15),
-    
-#         margin=dict(l=20,r=20,t=30,b=20)
-    
-#     )
-    
-#     st.plotly_chart(
-#         fig,
-#         use_container_width=True
-#     )
-
-#     st.markdown("---")
-
-#     # ---------------------- DISEASE INFORMATION ----------------------
-
-#     st.subheader("ℹ Disease Information")
-
-#     st.info(
-
-#         DISEASE_INFO[disease]
-
-#     )
-
-#     st.markdown("---")
-
-#     # ---------------------- MODEL DETAILS ----------------------
-
-#     with st.expander("📖 Model Details"):
-
-#     st.markdown("""
-
-# ### Model
-
-# - Custom CNN
-
-# - TensorFlow
-
-# - Input Size : **224 × 224**
-
-# - Explainability : **Grad-CAM**
-
-# - Output Classes : **4**
-
-# - Framework : **TensorFlow + Streamlit**
-
-# """)
-
-#     # ---------------------- DISCLAIMER ----------------------
-
-#     st.warning(
-
-#         """
-# ⚠ **Medical Disclaimer**
-
-# This AI model is intended **only for educational and research purposes**.
-
-# It should **NOT** be used as a substitute for professional medical diagnosis.
-
-# Always consult a qualified healthcare professional for clinical decisions.
-#         """
-
-#     )
 
 # ---------------------- FOOTER ----------------------
 

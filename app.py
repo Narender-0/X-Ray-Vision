@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
-
+import os
 from preprocess import preprocess_image
 from predict import predict, model
 from gradcam import LayerByLayerGradCAM, overlay_heatmap
@@ -66,6 +66,42 @@ div[data-testid="stMetric"]{
 
 </style>
 """, unsafe_allow_html=True)
+
+SAMPLE_IMAGES = {
+
+    "Normal": [
+        "sample_images/Normal/Normal01.png",
+        "sample_images/Normal/Normal02.png",
+        "sample_images/Normal/Normal03.png",
+        "sample_images/Normal/Normal04.png"
+    ],
+
+    "Pneumonia": [
+        "sample_images/Pneumonia/Pneumonia01.png",
+        "sample_images/Pneumonia/Pneumonia02.png",
+        "sample_images/Pneumonia/Pneumonia03.png",
+        "sample_images/Pneumonia/Pneumonia04.png",
+        "sample_images/Pneumonia/Pneumonia05.png",
+        "sample_images/Pneumonia/Pneumonia06.png",
+        "sample_images/Pneumonia/Pneumonia07.png"
+    ],
+
+    "Tuberculosis": [
+        "sample_images/Tuberculosis/Tuberculosis01.png",
+        "sample_images/Tuberculosis/Tuberculosis02.png",
+        "sample_images/Tuberculosis/Tuberculosis03.png",
+        "sample_images/Tuberculosis/Tuberculosis04.png",
+        "sample_images/Tuberculosis/Tuberculosis05.png",
+        "sample_images/Tuberculosis/Tuberculosis06.png",
+        
+        
+    ],
+
+    "Non-Xray": [
+        "sample_images/Non-Xray/Nonxray1.png",
+        "sample_images/Non-Xray/Nonxray2.png"
+    ]
+}
 
 # ---------------------- SIDEBAR ----------------------
 

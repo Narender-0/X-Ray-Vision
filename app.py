@@ -294,22 +294,78 @@ if uploaded is not None:
         color_continuous_scale="Blues"
     )
 
+    # fig.update_traces(
+    #     texttemplate="%{text:.2f}%",
+    #     textposition="outside"
+    # )
     fig.update_traces(
-        texttemplate="%{text:.2f}%",
-        textposition="outside"
+
+    texttemplate="%{text:.2f}%",
+
+    textposition="outside",
+
+    textfont=dict(
+        size=15,
+        color="black")
+
     )
+
+    # fig.update_layout(
+    #     height=350,
+    #     xaxis_title="Confidence (%)",
+    #     yaxis_title="",
+    #     coloraxis_showscale=False,
+    #     plot_bgcolor="black",
+    #     paper_bgcolor="white",
+    #     font=dict(size=15),
+    #     margin=dict(l=20, r=20, t=30, b=20)
+    # )
 
     fig.update_layout(
-        height=350,
-        xaxis_title="Confidence (%)",
-        yaxis_title="",
-        coloraxis_showscale=False,
-        plot_bgcolor="black",
-        paper_bgcolor="white",
-        font=dict(size=15),
-        margin=dict(l=20, r=20, t=30, b=20)
-    )
 
+    height=350,
+
+    xaxis_title="Confidence (%)",
+
+    yaxis_title="",
+
+    coloraxis_showscale=False,
+
+    plot_bgcolor="white",
+
+    paper_bgcolor="white",
+
+    margin=dict(l=20, r=20, t=30, b=20),
+
+    font=dict(
+        family="Arial",
+        size=15,
+        color="black"      # <-- Makes all text black
+    ),
+
+    xaxis=dict(
+        tickfont=dict(
+            size=14,
+            color="black"
+        ),
+        title_font=dict(
+            size=16,
+            color="black"
+        ),
+        showgrid=True,
+        gridcolor="lightgray"
+    ),
+
+    yaxis=dict(
+        tickfont=dict(
+            size=15,
+            color="black"
+        ),
+        title_font=dict(
+            color="black"
+        ))
+
+    )
     st.plotly_chart(
         fig,
         use_container_width=True

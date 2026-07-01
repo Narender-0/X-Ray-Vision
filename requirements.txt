@@ -6,4 +6,3 @@ opencv-python-headless
 Pillow
 scikit-learn
 plotly
-os

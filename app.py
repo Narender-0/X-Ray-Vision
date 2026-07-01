@@ -132,6 +132,24 @@ with st.sidebar:
 
     st.subheader("Developer")
 
+    st.markdown("---")
+
+    st.subheader("🧪 Try Sample Images")
+
+    selected_category = st.selectbox(
+
+    "Disease Category",
+
+    list(SAMPLE_IMAGES.keys()))
+
+    selected_image = st.selectbox(
+
+    "Choose Image",
+
+    SAMPLE_IMAGES[selected_category])
+    
+    use_sample = st.button(" Load Sample Image")
+
     st.write("Narender Kumar")
 
     st.write("M.Sc Mathematics & Computing")
@@ -230,16 +248,25 @@ uploaded = st.file_uploader(
     type=["jpg","jpeg","png"]
 
 )
+uploaded_image = None
 
+if uploaded is not None:
+
+    uploaded_image = uploaded
+
+elif use_sample:
+
+    uploaded_image = selected_image
+    
 st.markdown("---")
 # ---------------------- PREDICTION ----------------------
 
-if uploaded is not None:
+if uploaded_image is not None:
 
     with st.spinner(" AI is analyzing the Chest X-Ray..."):
 
         # Preprocess image
-        image, original = preprocess_image(uploaded)
+        image, original = preprocess_image(uploaded_image)
 
         # Predict
         disease, confidence, probabilities = predict(image)

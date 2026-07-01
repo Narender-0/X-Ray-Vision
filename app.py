@@ -295,65 +295,45 @@ if uploaded is not None:
     # )
     # ---------------------- PROBABILITY CHART ----------------------
 
-st.subheader("📊 Prediction Confidence for Each Class")
+    st.subheader("📊 Prediction Confidence for Each Class")
 
-probability_df = pd.DataFrame(
-    {
-        "Disease": CLASS_NAMES,
-        "Confidence": probabilities[0] * 100
-    }
-)
+    probability_df = pd.DataFrame(
+        {
+            "Disease": CLASS_NAMES,
+            "Confidence": probabilities[0] * 100
+        }
+    )
 
-fig = px.bar(
+    fig = px.bar(
+        probability_df,
+        x="Confidence",
+        y="Disease",
+        orientation="h",
+        text="Confidence",
+        color="Confidence",
+        color_continuous_scale="Blues"
+    )
 
-    probability_df,
+    fig.update_traces(
+        texttemplate="%{text:.2f}%",
+        textposition="outside"
+    )
 
-    x="Confidence",
+    fig.update_layout(
+        height=350,
+        xaxis_title="Confidence (%)",
+        yaxis_title="",
+        coloraxis_showscale=False,
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        font=dict(size=15),
+        margin=dict(l=20, r=20, t=30, b=20)
+    )
 
-    y="Disease",
-
-    orientation="h",
-
-    text="Confidence",
-
-    color="Confidence",
-
-    color_continuous_scale="Blues"
-
-)
-
-fig.update_traces(
-
-    texttemplate="%{text:.2f}%",
-
-    textposition="outside"
-
-)
-
-fig.update_layout(
-
-    height=350,
-
-    xaxis_title="Confidence (%)",
-
-    yaxis_title="",
-
-    coloraxis_showscale=False,
-
-    plot_bgcolor="white",
-
-    paper_bgcolor="white",
-
-    font=dict(size=15),
-
-    margin=dict(l=20,r=20,t=30,b=20)
-
-)
-
-st.plotly_chart(
-    fig,
-    use_container_width=True
-)
+    st.plotly_chart(
+        fig,
+        use_container_width=True
+    )
 
     st.markdown("---")
 
@@ -362,9 +342,7 @@ st.plotly_chart(
     st.subheader("ℹ Disease Information")
 
     st.info(
-
         DISEASE_INFO[disease]
-
     )
 
     st.markdown("---")
@@ -374,27 +352,19 @@ st.plotly_chart(
     with st.expander("📖 Model Details"):
 
         st.markdown("""
-
 ### Model
 
-- Custom CNN
-
-- TensorFlow
-
-- Input Size : **224 × 224**
-
-- Explainability : **Grad-CAM**
-
-- Output Classes : **4**
-
-- Framework : **TensorFlow + Streamlit**
-
-""")
+- **Architecture:** Custom CNN
+- **Framework:** TensorFlow
+- **Input Size:** 224 × 224
+- **Explainability:** Grad-CAM
+- **Output Classes:** 4
+- **Deployment:** Streamlit
+        """)
 
     # ---------------------- DISCLAIMER ----------------------
 
     st.warning(
-
         """
 ⚠ **Medical Disclaimer**
 
@@ -402,10 +372,120 @@ This AI model is intended **only for educational and research purposes**.
 
 It should **NOT** be used as a substitute for professional medical diagnosis.
 
-Always consult a qualified healthcare professional for clinical decisions.
+Always consult a qualified healthcare professional before making any medical decisions.
         """
-
     )
+# st.subheader("📊 Prediction Confidence for Each Class")
+
+#     probability_df = pd.DataFrame(
+#         {
+#             "Disease": CLASS_NAMES,
+#             "Confidence": probabilities[0] * 100
+#         }
+#     )
+    
+#     fig = px.bar(
+    
+#         probability_df,
+    
+#         x="Confidence",
+    
+#         y="Disease",
+    
+#         orientation="h",
+    
+#         text="Confidence",
+    
+#         color="Confidence",
+    
+#         color_continuous_scale="Blues"
+    
+#     )
+    
+#     fig.update_traces(
+    
+#         texttemplate="%{text:.2f}%",
+    
+#         textposition="outside"
+    
+#     )
+    
+#     fig.update_layout(
+    
+#         height=350,
+    
+#         xaxis_title="Confidence (%)",
+    
+#         yaxis_title="",
+    
+#         coloraxis_showscale=False,
+    
+#         plot_bgcolor="white",
+    
+#         paper_bgcolor="white",
+    
+#         font=dict(size=15),
+    
+#         margin=dict(l=20,r=20,t=30,b=20)
+    
+#     )
+    
+#     st.plotly_chart(
+#         fig,
+#         use_container_width=True
+#     )
+
+#     st.markdown("---")
+
+#     # ---------------------- DISEASE INFORMATION ----------------------
+
+#     st.subheader("ℹ Disease Information")
+
+#     st.info(
+
+#         DISEASE_INFO[disease]
+
+#     )
+
+#     st.markdown("---")
+
+#     # ---------------------- MODEL DETAILS ----------------------
+
+#     with st.expander("📖 Model Details"):
+
+#     st.markdown("""
+
+# ### Model
+
+# - Custom CNN
+
+# - TensorFlow
+
+# - Input Size : **224 × 224**
+
+# - Explainability : **Grad-CAM**
+
+# - Output Classes : **4**
+
+# - Framework : **TensorFlow + Streamlit**
+
+# """)
+
+#     # ---------------------- DISCLAIMER ----------------------
+
+#     st.warning(
+
+#         """
+# ⚠ **Medical Disclaimer**
+
+# This AI model is intended **only for educational and research purposes**.
+
+# It should **NOT** be used as a substitute for professional medical diagnosis.
+
+# Always consult a qualified healthcare professional for clinical decisions.
+#         """
+
+#     )
 
 # ---------------------- FOOTER ----------------------
 

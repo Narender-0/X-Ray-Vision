@@ -67,40 +67,54 @@ div[data-testid="stMetric"]{
 </style>
 """, unsafe_allow_html=True)
 
+# SAMPLE_IMAGES = {
+
+#     "Normal": [
+#         "sample_images/Normal/Normal01.png",
+#         "sample_images/Normal/Normal02.png",
+#         "sample_images/Normal/Normal03.png",
+#         "sample_images/Normal/Normal04.png"
+#     ],
+
+#     "Pneumonia": [
+#         "sample_images/Pneumonia/Pneumonia01.png",
+#         "sample_images/Pneumonia/Pneumonia02.png",
+#         "sample_images/Pneumonia/Pneumonia03.png",
+#         "sample_images/Pneumonia/Pneumonia04.png",
+#         "sample_images/Pneumonia/Pneumonia05.png",
+#         "sample_images/Pneumonia/Pneumonia06.png",
+#         "sample_images/Pneumonia/Pneumonia07.png"
+#     ],
+
+#     "Tuberculosis": [
+#         "sample_images/Tuberculosis/Tuberculosis01.png",
+#         "sample_images/Tuberculosis/Tuberculosis02.png",
+#         "sample_images/Tuberculosis/Tuberculosis03.png",
+#         "sample_images/Tuberculosis/Tuberculosis04.png",
+#         "sample_images/Tuberculosis/Tuberculosis05.png",
+#         "sample_images/Tuberculosis/Tuberculosis06.png",
+        
+        
+#     ],
+
+#     "Non-Xray": [
+#         "sample_images/Non-Xray/Nonxray1.png",
+#         "sample_images/Non-Xray/Nonxray2.png"
+#     ]
+# }
+
+def get_sample_images(folder):
+    return sorted([
+        os.path.join(folder, f)
+        for f in os.listdir(folder)
+        if f.lower().endswith((".png", ".jpg", ".jpeg"))
+    ])
+
 SAMPLE_IMAGES = {
-
-    "Normal": [
-        "sample_images/Normal/Normal01.png",
-        "sample_images/Normal/Normal02.png",
-        "sample_images/Normal/Normal03.png",
-        "sample_images/Normal/Normal04.png"
-    ],
-
-    "Pneumonia": [
-        "sample_images/Pneumonia/Pneumonia01.png",
-        "sample_images/Pneumonia/Pneumonia02.png",
-        "sample_images/Pneumonia/Pneumonia03.png",
-        "sample_images/Pneumonia/Pneumonia04.png",
-        "sample_images/Pneumonia/Pneumonia05.png",
-        "sample_images/Pneumonia/Pneumonia06.png",
-        "sample_images/Pneumonia/Pneumonia07.png"
-    ],
-
-    "Tuberculosis": [
-        "sample_images/Tuberculosis/Tuberculosis01.png",
-        "sample_images/Tuberculosis/Tuberculosis02.png",
-        "sample_images/Tuberculosis/Tuberculosis03.png",
-        "sample_images/Tuberculosis/Tuberculosis04.png",
-        "sample_images/Tuberculosis/Tuberculosis05.png",
-        "sample_images/Tuberculosis/Tuberculosis06.png",
-        
-        
-    ],
-
-    "Non-Xray": [
-        "sample_images/Non-Xray/Nonxray1.png",
-        "sample_images/Non-Xray/Nonxray2.png"
-    ]
+    "Normal": get_sample_images("sample_images/Normal"),
+    "Pneumonia": get_sample_images("sample_images/Pneumonia"),
+    "Tuberculosis": get_sample_images("sample_images/Tuberculosis"),
+    "Non-Xray": get_sample_images("sample_images/Non-Xray")
 }
 
 # ---------------------- SIDEBAR ----------------------
@@ -110,15 +124,18 @@ with st.sidebar:
     st.title("🩻 Chest X-Ray AI")
 
     st.markdown("---")
+    st.subheader("Try Sample Images")
 
-    st.subheader("Supported Diseases")
+    selected_category = st.selectbox(
+        "Disease Category",
+        list(SAMPLE_IMAGES.keys())
+    )
 
-    st.success("✔ Normal")
-    st.error("✔ Pneumonia")
-    st.warning("✔ Tuberculosis")
-    st.info("✔ Non-Xray")
+
 
     st.markdown("---")
+
+    use_sample = st.button("Load Sample Image")
 
     st.subheader("Model")
 
@@ -147,12 +164,14 @@ with st.sidebar:
     "Choose Image",
 
     SAMPLE_IMAGES[selected_category])
-    
-    use_sample = st.button(" Load Sample Image")
 
+    st.subheader("Developer")
+    
     st.write("Narender Kumar")
 
-    st.write("M.Sc Mathematics & Computing")
+    st.write("Shubham Karmekar")
+
+    st.write("M.Sc Mathematics")
 
     st.write("IIT Guwahati")
 
@@ -241,6 +260,14 @@ DISEASE_INFO = {
 
 # ---------------------- FILE UPLOADER ----------------------
 
+st.markdown("""
+## Upload Your Own Chest X-Ray
+
+**OR**
+
+### Use the Sample Images available in the sidebar.
+""")
+
 uploaded = st.file_uploader(
 
     " Upload Chest X-Ray",
@@ -248,14 +275,9 @@ uploaded = st.file_uploader(
     type=["jpg","jpeg","png"]
 
 )
-uploaded_image = None
+uploaded_image = uploaded if uploaded is not None else None
 
-if uploaded is not None:
-
-    uploaded_image = uploaded
-
-elif use_sample:
-
+if use_sample:
     uploaded_image = selected_image
     
 st.markdown("---")
@@ -270,6 +292,11 @@ if uploaded_image is not None:
 
         # Predict
         disease, confidence, probabilities = predict(image)
+
+        if use_sample:
+            st.info(
+                f"Using sample image: {os.path.basename(selected_image)}"
+        )
 
         # Grad-CAM
         gradcam = LayerByLayerGradCAM(model)

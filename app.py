@@ -114,7 +114,7 @@ SAMPLE_IMAGES = {
     "Normal": get_sample_images("sample_images/Normal"),
     "Pneumonia": get_sample_images("sample_images/Pneumonia"),
     "Tuberculosis": get_sample_images("sample_images/Tuberculosis"),
-    "Non-Xray": get_sample_images("sample_images/Non-Xray")
+    "Non-Xray": get_sample_images("sample_images/Nonxray")
 }
 
 # ---------------------- SIDEBAR ----------------------

@@ -1,15 +1,29 @@
 import tensorflow as tf
 import numpy as np
+
 from config import CLASS_NAMES
 
+
+# Load model only once
 model = tf.keras.models.load_model("best_model.h5")
 
+
 def predict(image):
+    """
+    Predict disease from a preprocessed image.
 
-    prediction = model.predict(image, verbose=0)
+    Returns:
+        disease (str)
+        confidence (float)
+        probabilities (ndarray)
+    """
 
-    index = np.argmax(prediction)
+    probabilities = model.predict(image, verbose=0)
 
-    confidence = prediction[0][index]
+    predicted_index = int(np.argmax(probabilities))
 
-    return CLASS_NAMES[index], confidence, prediction
+    confidence = float(probabilities[0][predicted_index])
+
+    disease = CLASS_NAMES[predicted_index]
+
+    return disease, confidence, probabilities

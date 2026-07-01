@@ -128,7 +128,7 @@ DISEASE_INFO = {
 
     "Normal":
     """
-    ✅ **No abnormality detected**
+     **No abnormality detected**
 
     The uploaded X-ray appears normal.
 
@@ -139,7 +139,7 @@ DISEASE_INFO = {
 
     "Pneumonia":
     """
-    🔴 **Pneumonia Detected**
+     **Pneumonia Detected**
 
     Pneumonia is an infection that inflames the air sacs of one or both lungs.
 
@@ -158,7 +158,7 @@ DISEASE_INFO = {
 
     "Tuberculosis":
     """
-    🟠 **Tuberculosis Detected**
+     **Tuberculosis Detected**
 
     Tuberculosis is a bacterial disease affecting the lungs.
 
@@ -406,15 +406,15 @@ st.markdown(
 """
 <div style='text-align:center'>
 
-Made with ❤️ using <b>TensorFlow</b>, <b>Streamlit</b> and <b>Grad-CAM</b>
+Made by using <b>TensorFlow</b>, <b>Streamlit</b> and <b>Grad-CAM</b>
 
 <br>
 
-<b>Narender Kumar</b>
+<b>Narender Kumar & Shubham karmekar</b>
 
 <br>
 
-M.Sc. Mathematics & Computing
+M.Sc. Mathematics
 
 <br>
 

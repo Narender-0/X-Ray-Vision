@@ -122,20 +122,33 @@ SAMPLE_IMAGES = {
 with st.sidebar:
 
     st.title("🩻 Chest X-Ray AI")
-
-    st.markdown("---")
     st.subheader("Try Sample Images")
 
     selected_category = st.selectbox(
-        "Disease Category",
-        list(SAMPLE_IMAGES.keys())
-    )
 
+    "Disease Category",
 
+    list(SAMPLE_IMAGES.keys()))
+
+    selected_image = st.selectbox(
+
+    "Choose Image",
+
+    SAMPLE_IMAGES[selected_category])
+
+    # st.markdown("---")
+    # st.subheader("Try Sample Images")
+
+    # selected_category = st.selectbox(
+    #     "Disease Category",
+    #     list(SAMPLE_IMAGES.keys())
+    # )
+
+    use_sample = st.button("Load Sample Image")
 
     st.markdown("---")
 
-    use_sample = st.button("Load Sample Image")
+   
 
     st.subheader("Model")
 
@@ -151,20 +164,7 @@ with st.sidebar:
 
     st.markdown("---")
 
-    st.subheader("🧪 Try Sample Images")
-
-    selected_category = st.selectbox(
-
-    "Disease Category",
-
-    list(SAMPLE_IMAGES.keys()))
-
-    selected_image = st.selectbox(
-
-    "Choose Image",
-
-    SAMPLE_IMAGES[selected_category])
-
+    
     st.subheader("Developer")
     
     st.write("Narender Kumar")
@@ -315,7 +315,7 @@ if uploaded_image is not None:
 
         st.image(
             original,
-            use_container_width=True
+            width="stretch"
         )
 
     with right_col:
@@ -324,7 +324,7 @@ if uploaded_image is not None:
 
         st.image(
             overlay,
-            use_container_width=True
+            width="stretch"
         )
 
     st.markdown("---")
@@ -443,7 +443,7 @@ if uploaded_image is not None:
     )
     st.plotly_chart(
         fig,
-        use_container_width=True
+        width="stretch"
     )
 
     st.markdown("---")

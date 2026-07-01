@@ -275,27 +275,6 @@ if uploaded is not None:
 
     # ---------------------- PROBABILITY CHART ----------------------
 
-    # st.subheader("📊 Prediction Probabilities")
-
-    # probability_df = pd.DataFrame(
-
-    #     {
-
-    #         "Disease": CLASS_NAMES,
-
-    #         "Probability": probabilities[0]
-
-    #     }
-
-    # )
-
-    # st.bar_chart(
-
-    #     probability_df.set_index("Disease")
-
-    # )
-    # ---------------------- PROBABILITY CHART ----------------------
-
     st.subheader("📊 Prediction Confidence for Each Class")
 
     probability_df = pd.DataFrame(
@@ -325,7 +304,7 @@ if uploaded is not None:
         xaxis_title="Confidence (%)",
         yaxis_title="",
         coloraxis_showscale=False,
-        plot_bgcolor="white",
+        plot_bgcolor="black",
         paper_bgcolor="white",
         font=dict(size=15),
         margin=dict(l=20, r=20, t=30, b=20)

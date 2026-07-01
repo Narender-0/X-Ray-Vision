@@ -67,41 +67,6 @@ div[data-testid="stMetric"]{
 </style>
 """, unsafe_allow_html=True)
 
-# SAMPLE_IMAGES = {
-
-#     "Normal": [
-#         "sample_images/Normal/Normal01.png",
-#         "sample_images/Normal/Normal02.png",
-#         "sample_images/Normal/Normal03.png",
-#         "sample_images/Normal/Normal04.png"
-#     ],
-
-#     "Pneumonia": [
-#         "sample_images/Pneumonia/Pneumonia01.png",
-#         "sample_images/Pneumonia/Pneumonia02.png",
-#         "sample_images/Pneumonia/Pneumonia03.png",
-#         "sample_images/Pneumonia/Pneumonia04.png",
-#         "sample_images/Pneumonia/Pneumonia05.png",
-#         "sample_images/Pneumonia/Pneumonia06.png",
-#         "sample_images/Pneumonia/Pneumonia07.png"
-#     ],
-
-#     "Tuberculosis": [
-#         "sample_images/Tuberculosis/Tuberculosis01.png",
-#         "sample_images/Tuberculosis/Tuberculosis02.png",
-#         "sample_images/Tuberculosis/Tuberculosis03.png",
-#         "sample_images/Tuberculosis/Tuberculosis04.png",
-#         "sample_images/Tuberculosis/Tuberculosis05.png",
-#         "sample_images/Tuberculosis/Tuberculosis06.png",
-        
-        
-#     ],
-
-#     "Non-Xray": [
-#         "sample_images/Non-Xray/Nonxray1.png",
-#         "sample_images/Non-Xray/Nonxray2.png"
-#     ]
-# }
 
 def get_sample_images(folder):
     return sorted([
@@ -136,14 +101,6 @@ with st.sidebar:
 
     SAMPLE_IMAGES[selected_category])
 
-    # st.markdown("---")
-    # st.subheader("Try Sample Images")
-
-    # selected_category = st.selectbox(
-    #     "Disease Category",
-    #     list(SAMPLE_IMAGES.keys())
-    # )
-
     use_sample = st.button("Load Sample Image")
 
     st.markdown("---")
@@ -159,11 +116,6 @@ with st.sidebar:
     st.write("Grad-CAM Explainability")
 
     st.markdown("---")
-
-    st.subheader("Developer")
-
-    st.markdown("---")
-
     
     st.subheader("Developer")
     

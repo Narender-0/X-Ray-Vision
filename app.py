@@ -1,52 +1,56 @@
 import streamlit as st
 
-import tensorflow as tf
-
 from preprocess import preprocess_image
 
-from predict import predict
+from predict import predict, model
 
-from predict import model
+from gradcam import LayerByLayerGradCAM, overlay_heatmap
 
-from gradcam import GradCAM
-
-import matplotlib.pyplot as plt
-
-st.set_page_config(page_title="Chest X-Ray Diagnosis")
-
-st.title("Explainable AI for Chest X-Ray Diagnosis")
-
-uploaded = st.file_uploader(
-    "Upload Chest X-Ray",
-    type=["jpg","jpeg","png"]
+st.set_page_config(
+    page_title="Chest X-Ray Diagnosis",
+    layout="centered"
 )
 
-if uploaded:
+st.title("🩻 Explainable AI for Chest X-Ray Diagnosis")
 
+uploaded = st.file_uploader(
+    "Upload Chest X-Ray Image",
+    type=["jpg", "jpeg", "png"]
+)
+
+if uploaded is not None:
+
+    # Preprocess image
     image, original = preprocess_image(uploaded)
 
-    st.image(original,width=350)
-
-    disease, confidence, prediction = predict(image)
-
-    st.success(f"Prediction : {disease}")
-
-    st.write(f"Confidence : {confidence*100:.2f}%")
-
-    gradcam = GradCAM(model)
-
-    heatmap = gradcam.generate(image)
-
-    fig, ax = plt.subplots()
-
-    ax.imshow(original)
-
-    ax.imshow(
-        heatmap,
-        cmap="jet",
-        alpha=0.4
+    # Display uploaded image
+    st.image(
+        original,
+        caption="Uploaded Image",
+        width=350
     )
 
-    ax.axis("off")
+    # Predict
+    disease, confidence, prediction = predict(image)
 
-    st.pyplot(fig)
+    st.success(f"Prediction: {disease}")
+
+    st.metric(
+        label="Confidence",
+        value=f"{confidence*100:.2f}%"
+    )
+
+    # Generate Grad-CAM
+    gradcam = LayerByLayerGradCAM(model)
+
+    heatmap, predicted_class = gradcam.compute_heatmap(image)
+
+    overlay = overlay_heatmap(original, heatmap)
+
+    st.subheader("Grad-CAM Visualization")
+
+    st.image(
+        overlay,
+        caption="Model Attention Heatmap",
+        use_container_width=True
+    )

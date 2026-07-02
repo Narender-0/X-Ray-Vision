@@ -121,7 +121,7 @@ with st.sidebar:
     
     st.write("Narender Kumar")
 
-    st.write("Shubham Karmekar")
+    st.write("Subham Karmakar")
 
     st.write("M.Sc Mathematics")
 
@@ -452,7 +452,7 @@ Made by using <b>TensorFlow</b>, <b>Streamlit</b> and <b>Grad-CAM</b>
 
 <br>
 
-<b>Narender Kumar & Shubham karmekar</b>
+<b>Narender Kumar & Subham karmakar</b>
 
 <br>
 
